@@ -46,4 +46,23 @@ features, labels = load_haxby_data(cwd, 'subj4', 'mask4_vt'); sub4 = np.hstack((
 features, labels = load_haxby_data(cwd, 'subj5', 'mask4_vt'); sub5 = np.hstack((labels, features))
 print "Subject 1:", sub1.shape, "\nSubject 2:", sub2.shape, "\nSubject 3:", sub3.shape, "\nSubject 4:", sub4.shape, "\nSubject 5:", sub5.shape
 
+#create category matrices:
+face = []
+cat = []
+bottle = []
+shoe = []
+scissors = []
+house = []
+chair = []
+control = []
 
+#sorting_function looks at the label (first index in each array) and appends entire array to the proper category matrix
+def sorting_function(array):
+    #input arguments: array is a single row taken from one of the subject's matrix of samples (denotes one sample)
+    if array[0] == 'face': #if the label of the sample is 'face'
+        face.extend(array) #add the sample to the 'face' matrix
+    #continue for all other possible labels
+    return
+
+#for sub1, go through each row and apply a function
+np.apply_along_axis(sorting_function, axis=1, arr=sub1)
